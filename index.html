@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário 🎂</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --rosa: #e8547a;
+            --rosa2: #ff8fab;
+            --rosa3: #ffc2d4;
+            --creme: #fff5f7;
+            --escuro: #3a1a25;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--creme);
+            color: var(--escuro);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── TELA INICIAL ── */
+        #tela-inicio {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #e8547a 0%, #ff8fab 50%, #ffc2d4 100%);
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
+
+        #tela-inicio.oculta {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .titulo-inicio {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 8vw, 4rem);
+            font-weight: 300;
+            color: white;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.04em;
+            line-height: 1.2;
+            text-align: center;
+            padding: 0 20px;
+            margin-bottom: 12px;
+        }
+
+        .data-inicio {
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 48px;
+        }
+
+        .btn-iniciar {
+            background: white;
+            color: var(--rosa);
+            border: none;
+            border-radius: 50px;
+            padding: 16px 44px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-iniciar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-iniciar:active {
+            transform: translateY(0);
+        }
+
+        /* ── CONTEÚDO PRINCIPAL ── */
+        #app {
+            min-height: 100vh;
+            padding: 40px 20px 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2rem, 7vw, 3.2rem);
+            font-weight: 300;
+            color: var(--rosa);
+            line-height: 1.2;
+            margin-bottom: 6px;
+        }
+
+        .header .data-tag {
+            display: inline-block;
+            background: var(--rosa3);
+            color: var(--rosa);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 5px 16px;
+            border-radius: 20px;
+            margin-bottom: 4px;
+        }
+
+        .header .contador-wrapper {
+            font-size: 0.95rem;
+            color: #b0607a;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        /* ── CARD FRASES ── */
+        .card-frases {
+            background: white;
+            border-radius: 24px;
+            padding: 40px 32px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 4px 40px rgba(232, 84, 122, 0.1);
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 24px;
+        }
+
+        #texto {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.3rem, 4vw, 1.6rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--escuro);
+            line-height: 1.7;
+            text-align: center;
+            min-height: 60px;
+        }
+
+        #cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: var(--rosa);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: piscar 0.8s step-end infinite;
+        }
+
+        @keyframes piscar {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0
+            }
+        }
+
+        #progresso {
+            font-size: 0.75rem;
+            color: #cca0b0;
+            margin-top: 16px;
+            letter-spacing: 0.1em;
+        }
+
+        .btn-proximo {
+            background: linear-gradient(135deg, var(--rosa), var(--rosa2));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 14px 40px;
+            font-family: 'Lato', sans-serif;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(232, 84, 122, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            margin-bottom: 32px;
+        }
+
+        .btn-proximo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(232, 84, 122, 0.45);
+        }
+
+        .btn-proximo:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ── CARD SURPRESA ── */
+        #surpresa {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            max-width: 500px;
+            width: 100%;
+            animation: surgir 0.6s ease;
+        }
+
+        @keyframes surgir {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        #surpresa h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
+            font-weight: 300;
+            color: var(--rosa);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #surpresa img {
+            width: 80%;
+            max-width: 260px;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(232, 84, 122, 0.2);
+            margin-bottom: 28px;
+        }
+
+        /* ── TEXTO MÚSICA 2 ── */
+        #textoMusica2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--escuro);
+            line-height: 1.8;
+            text-align: center;
+            min-height: 60px;
+            max-width: 440px;
+            padding: 0 16px;
+        }
+
+        #cursor2 {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background: var(--rosa);
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: piscar 0.8s step-end infinite;
+        }
+
+        /* ── CORAÇÕES FLUTUANTES ── */
+        .coracao {
+            position: fixed;
+            pointer-events: none;
+            animation: cair linear forwards;
+            z-index: 5;
+        }
+
+        @keyframes cair {
+            0% {
+                transform: translateY(-10px) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(105vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+
+        /* ── BARRA INFERIOR (legenda) ── */
+        #legenda {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(232, 84, 122, 0.18), transparent);
+            padding: 14px 0 18px;
+            pointer-events: none;
+            display: none;
+        }
+
+        #rolando {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--rosa);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.6s;
+        }
+
+        #rolando.visivel {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TELA INICIAL -->
+    <div id="tela-inicio">
+        <p class="titulo-inicio">Feliz Aniversário 🎂</p>
+        <p class="data-inicio">16 de Maio</p>
+        <button class="btn-iniciar" onclick="iniciar()">Começar ❤️</button>
+    </div>
+
+    <!-- APP PRINCIPAL -->
+    <div id="app">
+        <div class="header">
+            <h1>💖 Nossa História 💖</h1>
+            <span class="data-tag">Feliz Aniversário · 16/05</span>
+            <div class="contador-wrapper" id="contador"></div>
+        </div>
+
+        <div class="card-frases">
+            <div id="texto"><span style="color:#cca0b0;font-style:italic;font-size:1rem;">Clique em Próximo para começar
+                    ❤️</span></div>
+            <div id="progresso"></div>
+        </div>
+
+        <button class="btn-proximo" id="btnProximo" onclick="proximaFrase()">Próximo ❤️</button>
+
+        <!-- SURPRESA -->
+        <div id="surpresa">
+            <h2>Eu te amo ❤️</h2>
+            <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="amor">
+            <div id="textoMusica2"></div>
+        </div>
+    </div>
+
+    <!-- LEGENDA FUNDO -->
+    <div id="legenda"><span id="rolando"></span></div>
+
+    <!-- ÁUDIOS -->
+    <audio id="audio1" preload="auto">
+        <source src="John_Legend_-_All_of_Me__Official_Video__-_johnlegendVEVO__youtube_.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="audio2" preload="auto">
+        <source
+            src="Ed_Sheeran_-_Photograph___Tradução_Legendado___Filme_Como_Eu_Era_Antes_De_Você_-_Têvalldo_Lyrics__128k_.mp3"
+            type="audio/mpeg">
+    </audio>
+
+    <script>
+        // ── FRASES HISTÓRIA (música 1 toca junto) ──
+        const frases = [
+            "Eu ainda lembro do dia que te conheci...",
+            "No meio da rotina do trabalho...",
+            "Você apareceu sem aviso...",
+            "No começo, eu era só aquele cara meio chato 😅",
+            "Mas você foi se acostumando comigo...",
+            "E eu fui me acostumando com você...",
+            "Até que chegou aquele dia dentro do carro...",
+            "Eu te levei pra casa...",
+            "Mas na verdade eu queria começar algo novo...",
+            "Eu te pedi em namoro...",
+            "Mesmo meio inseguro...",
+            "E você... disse sim ❤️",
+            "E aquele 'sim' mudou tudo.",
+            "Hoje eu sei que não foi por acaso...",
+            "Foi você."
+        ];
+
+        let fraseIndex = 0;
+        let digitando = false;
+        let timeoutDigitar = null;
+
+        // Digitar sem innerHTML+= (evita bug com emojis)
+        function digitar(texto, elId, cursorId, cb) {
+            const el = document.getElementById(elId);
+            const cur = cursorId ? document.getElementById(cursorId) : null;
+            el.textContent = "";
+            if (cur) el.appendChild(cur);
+            let i = 0;
+
+            function passo() {
+                if (i <= texto.length) {
+                    el.textContent = texto.slice(0, i);
+                    if (cur) el.appendChild(cur);
+                    i++;
+                    timeoutDigitar = setTimeout(passo, 42);
+                } else {
+                    digitando = false;
+                    if (cb) cb();
+                }
+            }
+            digitando = true;
+            passo();
+        }
+
+        function proximaFrase() {
+            if (digitando) return; // espera acabar de digitar
+            const btn = document.getElementById("btnProximo");
+
+            if (fraseIndex < frases.length) {
+                btn.disabled = true;
+                digitar(frases[fraseIndex], "texto", "cursor", () => {
+                    fraseIndex++;
+                    atualizarProgresso();
+                    if (fraseIndex < frases.length) {
+                        btn.disabled = false;
+                    } else {
+                        // Acabou as frases → mostrar surpresa
+                        btn.textContent = "Ver surpresa 💌";
+                        btn.disabled = false;
+                        btn.onclick = mostrarSurpresa;
+                    }
+                });
+            }
+        }
+
+        function atualizarProgresso() {
+            const el = document.getElementById("progresso");
+            if (fraseIndex > 0 && fraseIndex <= frases.length) {
+                el.textContent = fraseIndex + " / " + frases.length;
+            }
+        }
+
+        // Inserir o cursor no DOM
+        document.getElementById("texto").insertAdjacentHTML("afterbegin", '<span id="cursor"></span>');
+
+        // ── CONTADOR ──
+        const dataInicio = new Date("2024-01-01"); // ALTERE a data do relacionamento
+        function atualizarContador() {
+            const diff = new Date() - dataInicio;
+            const dias = Math.floor(diff / 86400000);
+            document.getElementById("contador").textContent = "Estamos juntos há " + dias + " dias ❤️";
+        }
+        atualizarContador();
+        setInterval(atualizarContador, 1000);
+
+        // ── CORAÇÕES ──
+        setInterval(() => {
+            const c = document.createElement("div");
+            c.textContent = ["❤️", "🌸", "💕", "✨"][Math.floor(Math.random() * 4)];
+            c.classList.add("coracao");
+            c.style.left = (Math.random() * 100) + "vw";
+            c.style.top = "-30px";
+            c.style.fontSize = (14 + Math.random() * 18) + "px";
+            const dur = 4 + Math.random() * 3;
+            c.style.animationDuration = dur + "s";
+            document.body.appendChild(c);
+            setTimeout(() => c.remove(), dur * 1000 + 200);
+        }, 350);
+
+        // ── ÁUDIO ──
+        const audio1 = document.getElementById("audio1");
+        const audio2 = document.getElementById("audio2");
+
+        audio1.addEventListener("ended", () => {
+            iniciarSegundaMusica();
+        });
+
+        // ── INÍCIO (clique no botão da tela de abertura) ──
+        function iniciar() {
+            document.getElementById("tela-inicio").classList.add("oculta");
+            // Toca música 1
+            audio1.volume = 0.7;
+            audio1.play().catch(() => { });
+        }
+
+        // ── SURPRESA ──
+        function mostrarSurpresa() {
+            document.getElementById("surpresa").style.display = "flex";
+            document.getElementById("btnProximo").style.display = "none";
+            // Música 1 ainda pode estar tocando; se tiver acabado, inicia a 2 agora
+            if (audio1.ended || audio1.paused) {
+                iniciarSegundaMusica();
+            }
+            // Se ainda tocando, o event "ended" vai chamar iniciarSegundaMusica
+        }
+
+        // ── SEGUNDA MÚSICA + TEXTO SINCRONIZADO ──
+        // Photograph: ~257s. Temos 19 linhas → ~13.5s por linha
+        const textoMusica2 = [
+            "Essa música sempre foi especial pra mim...",
+            "Foi a primeira de romance que me marcou...",
+            "Ela vem do meu filme favorito...",
+            "E me lembra quem eu era antes de você...",
+            "",
+            "Mas hoje...",
+            "Ela me lembra você.",
+            "",
+            "Eu posso estar correndo atrás dos meus sonhos...",
+            "Posso não estar presente o tempo todo...",
+            "",
+            "Mas em cada momento do meu dia...",
+            "Eu penso em você.",
+            "",
+            "Mesmo distante...",
+            "Você nunca sai da minha mente.",
+            "",
+            "Não importa o caminho...",
+            "Eu sempre volto pra você ❤️"
+        ];
+
+        const DURACAO_MUSICA2 = 257; // segundos
+        // Intervalo entre linhas (distribui o tempo total)
+        const INTERVALO_LINHA = Math.floor((DURACAO_MUSICA2 * 1000) / textoMusica2.length);
+
+        let textoM2Timer = null;
+
+        function iniciarSegundaMusica() {
+            if (audio2.currentTime > 0) return; // já iniciou
+            audio2.volume = 0.7;
+            audio2.play().catch(() => { });
+            document.getElementById("legenda").style.display = "block";
+
+            // Garante que a surpresa aparece
+            document.getElementById("surpresa").style.display = "flex";
+            document.getElementById("btnProximo").style.display = "none";
+
+            // Insere o cursor no campo
+            const campo = document.getElementById("textoMusica2");
+            campo.insertAdjacentHTML("afterbegin", '<span id="cursor2"></span>');
+
+            let i = 0;
+            function mostrarLinha() {
+                if (i >= textoMusica2.length) return;
+                const linha = textoMusica2[i];
+                i++;
+
+                if (linha === "") {
+                    document.getElementById("textoMusica2").textContent = "";
+                    const cur2 = document.getElementById("cursor2");
+                    if (cur2) document.getElementById("textoMusica2").appendChild(cur2);
+                } else {
+                    digitar(linha, "textoMusica2", "cursor2", null);
+                }
+                atualizarLegenda(i);
+                textoM2Timer = setTimeout(mostrarLinha, INTERVALO_LINHA);
+            }
+
+            // Para quando a música acabar
+            audio2.addEventListener("ended", () => {
+                clearTimeout(textoM2Timer);
+                document.getElementById("textoMusica2").textContent = "❤️";
+                document.getElementById("legenda").style.display = "none";
+            });
+
+            mostrarLinha();
+        }
+
+        // ── LEGENDA RODAPÉ ──
+        const frasesLegenda = [
+            "O seu sorriso ilumina tudo...",
+            "Estar com você é leve...",
+            "Mesmo nos dias difíceis...",
+            "Você é meu pensamento constante...",
+            "Cada passo meu tem você...",
+            "Mesmo longe... eu penso em você ❤️"
+        ];
+        let legendaIdx = 0;
+
+        function atualizarLegenda() {
+            const el = document.getElementById("rolando");
+            el.classList.remove("visivel");
+            setTimeout(() => {
+                el.textContent = frasesLegenda[legendaIdx % frasesLegenda.length];
+                legendaIdx++;
+                el.classList.add("visivel");
+            }, 600);
+        }
+
+        // Inicia legenda quando música 2 começa
+        let legendaTimer = null;
+        const _iniciarLegenda = () => {
+            atualizarLegenda();
+            legendaTimer = setInterval(atualizarLegenda, 6000);
+        };
+        // Chama _iniciarLegenda quando música 2 inicia
+        audio2.addEventListener("play", _iniciarLegenda, { once: true });
+        audio2.addEventListener("ended", () => clearInterval(legendaTimer));
+    </script>
+</body>
+
+</html>
