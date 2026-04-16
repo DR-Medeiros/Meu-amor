@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Para Você - Nossa História ❤️</title>
+    <title>Feliz Aniversário ❤️</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Lato:wght@300;400;700&display=swap"
         rel="stylesheet">
@@ -20,17 +20,13 @@
             --shadow-medium: 0 12px 48px rgba(212, 81, 111, 0.18);
         }
 
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Lato', sans-serif;
@@ -53,6 +49,8 @@
             justify-content: center;
             background: linear-gradient(135deg, var(--rosa-primary) 0%, var(--rosa-light) 50%, #ff7fa8 100%);
             transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+            text-align: center;
+            padding: 24px;
         }
 
         #tela-inicio.oculta {
@@ -61,26 +59,54 @@
             pointer-events: none;
         }
 
+        /* ── Corações decorativos na tela inicial ── */
+        .inicio-coracao {
+            font-size: clamp(1.6rem, 5vw, 2.2rem);
+            margin-bottom: 8px;
+            animation: pulsarCoracao 2s ease-in-out infinite;
+            display: block;
+        }
+
+        @keyframes pulsarCoracao {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
         .titulo-inicio {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.5rem, 10vw, 4.2rem);
+            /* ✅ FIX: clamp menor para não estourar no mobile */
+            font-size: clamp(2rem, 8vw, 4rem);
             font-weight: 300;
             color: #ffffff;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            letter-spacing: 0.05em;
-            line-height: 1.1;
+            letter-spacing: 0.04em;
+            line-height: 1.15;
             text-align: center;
-            padding: 0 20px;
-            margin-bottom: 16px;
+            padding: 0 12px;
+            margin-bottom: 10px;
+            /* ✅ FIX: garante que não quebra mal */
+            word-break: break-word;
+            hyphens: auto;
+        }
+
+        .subtitulo-inicio {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1rem, 3.5vw, 1.4rem);
+            font-style: italic;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.92);
+            letter-spacing: 0.08em;
+            margin-bottom: 48px;
+            padding: 0 12px;
         }
 
         .data-inicio {
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            font-size: clamp(0.75rem, 2.2vw, 0.95rem);
             font-weight: 300;
-            color: rgba(255, 255, 255, 0.9);
-            letter-spacing: 0.25em;
+            color: rgba(255, 255, 255, 0.75);
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            margin-bottom: 60px;
+            margin-bottom: 8px;
         }
 
         .btn-iniciar {
@@ -88,32 +114,31 @@
             color: var(--rosa-primary);
             border: none;
             border-radius: 50px;
-            padding: 18px 52px;
+            /* ✅ FIX: padding responsivo para mobile */
+            padding: clamp(14px, 3vw, 18px) clamp(28px, 8vw, 52px);
             font-family: 'Lato', sans-serif;
-            font-size: 1rem;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
             font-weight: 600;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.1em;
             cursor: pointer;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
+            /* ✅ FIX: texto do botão quebra em mobile pequeno */
+            white-space: nowrap;
+            max-width: 90vw;
         }
 
-        .btn-iniciar:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
-        }
-
-        .btn-iniciar:active {
-            transform: translateY(-2px);
-        }
+        .btn-iniciar:hover { transform: translateY(-4px); box-shadow: 0 16px 50px rgba(0,0,0,0.25); }
+        .btn-iniciar:active { transform: translateY(-2px); }
 
         /* ══════════════════════════════════════════════════════════ */
         /* APP PRINCIPAL                                              */
         /* ══════════════════════════════════════════════════════════ */
         #app {
             min-height: 100vh;
-            padding: 50px 20px 200px;
+            /* ✅ FIX: padding-bottom grande para personagens fixos não cobrirem conteúdo */
+            padding: 50px 20px 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -128,20 +153,14 @@
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .header h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.2rem, 8vw, 3.5rem);
+            /* ✅ FIX: tamanho menor em mobile para não descentralizar */
+            font-size: clamp(1.6rem, 6vw, 3.2rem);
             font-weight: 300;
             background: linear-gradient(135deg, var(--rosa-primary) 0%, var(--rosa-light) 100%);
             -webkit-background-clip: text;
@@ -150,16 +169,24 @@
             line-height: 1.2;
             margin-bottom: 12px;
             letter-spacing: 0.02em;
+            /* ✅ FIX: texto centralizado sem quebra estranha */
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* ✅ FIX: em telas muito pequenas, permite quebra elegante */
+        @media (max-width: 380px) {
+            .header h1 { white-space: normal; word-break: break-word; }
         }
 
         .header .data-tag {
             display: inline-block;
             background: linear-gradient(135deg, var(--rosa-lighter) 0%, #ffcce5 100%);
             color: var(--rosa-primary);
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
+            font-size: clamp(0.65rem, 2vw, 0.75rem);
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            padding: 8px 20px;
+            padding: 7px 16px;
             border-radius: 30px;
             margin-bottom: 6px;
             font-weight: 600;
@@ -167,7 +194,7 @@
         }
 
         .header .contador-wrapper {
-            font-size: 0.95rem;
+            font-size: clamp(0.8rem, 2.5vw, 0.95rem);
             color: var(--rosa-primary);
             margin-top: 14px;
             font-weight: 400;
@@ -196,20 +223,13 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         #texto {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.4rem, 5vw, 1.8rem);
+            font-size: clamp(1.3rem, 4.5vw, 1.8rem);
             font-style: italic;
             font-weight: 300;
             color: var(--dark);
@@ -231,20 +251,11 @@
         }
 
         @keyframes piscar {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0;
-            }
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0; }
         }
 
-        #progresso {
-            display: none;
-        }
+        #progresso { display: none; }
 
         .btn-proximo {
             background: linear-gradient(135deg, var(--rosa-primary), var(--rosa-light));
@@ -263,20 +274,9 @@
             text-transform: uppercase;
         }
 
-        .btn-proximo:hover:not(:disabled) {
-            transform: translateY(-4px);
-            box-shadow: 0 14px 40px rgba(212, 81, 111, 0.4);
-        }
-
-        .btn-proximo:active:not(:disabled) {
-            transform: translateY(-2px);
-        }
-
-        .btn-proximo:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-proximo:hover:not(:disabled) { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(212,81,111,0.4); }
+        .btn-proximo:active:not(:disabled) { transform: translateY(-2px); }
+        .btn-proximo:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
         /* ══════════════════════════════════════════════════════════ */
         /* CARD SURPRESA                                              */
@@ -293,18 +293,13 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to   { opacity: 1; }
         }
 
         #surpresa h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 7vw, 2.8rem);
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
             font-weight: 300;
             background: linear-gradient(135deg, var(--rosa-primary) 0%, var(--rosa-light) 100%);
             -webkit-background-clip: text;
@@ -325,16 +320,14 @@
             transition: transform 0.3s ease;
         }
 
-        #surpresa img:hover {
-            transform: scale(1.02);
-        }
+        #surpresa img:hover { transform: scale(1.02); }
 
         /* ══════════════════════════════════════════════════════════ */
         /* TEXTO MÚSICA 2                                             */
         /* ══════════════════════════════════════════════════════════ */
         #textoMusica2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(1.3rem, 5vw, 1.7rem);
+            font-size: clamp(1.2rem, 4.5vw, 1.7rem);
             font-style: italic;
             font-weight: 300;
             color: var(--dark);
@@ -369,42 +362,40 @@
         }
 
         @keyframes cair {
-            0% {
-                transform: translateY(-30px) rotate(0deg) scale(1);
-                opacity: 1;
-            }
-
-            50% {
-                transform: translateX(calc(var(--tx) * 30px)) translateY(50vh) rotate(15deg) scale(0.95);
-            }
-
-            100% {
-                transform: translateX(calc(var(--tx) * 50px)) translateY(110vh) rotate(35deg) scale(0.7);
-                opacity: 0;
-            }
+            0%   { transform: translateY(-30px) rotate(0deg) scale(1); opacity: 1; }
+            50%  { transform: translateX(calc(var(--tx) * 30px)) translateY(50vh) rotate(15deg) scale(0.95); }
+            100% { transform: translateX(calc(var(--tx) * 50px)) translateY(110vh) rotate(35deg) scale(0.7); opacity: 0; }
         }
 
         /* ══════════════════════════════════════════════════════════ */
         /* PERSONAGENS PIXEL ART                                      */
+        /* ✅ FIX: position:fixed para não scrollar com a página      */
+        /* ✅ FIX: sempre visível (nunca display:none após iniciar)   */
         /* ══════════════════════════════════════════════════════════ */
         #personagens {
             position: fixed;
-            bottom: 60px;
+            bottom: 0;
             left: 0;
             right: 0;
             pointer-events: none;
-            z-index: 4;
+            /* ✅ FIX: z-index alto para ficar sempre na frente */
+            z-index: 50;
             display: none;
+            /* fundo gradiente suave para os personagens não ficarem soltos */
+            background: linear-gradient(to top, rgba(250,248,246,0.95) 60%, transparent 100%);
+            padding-bottom: 10px;
+            padding-top: 6px;
         }
 
         #textoPersonagens {
             text-align: center;
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            /* ✅ FIX: menor no mobile */
+            font-size: clamp(0.75rem, 2.8vw, 1rem);
             color: var(--rosa-primary);
-            margin-bottom: 12px;
-            min-height: 1.5em;
+            margin-bottom: 6px;
+            min-height: 1.4em;
             padding: 0 20px;
             opacity: 0;
             transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
@@ -412,9 +403,7 @@
             font-weight: 400;
         }
 
-        #textoPersonagens.visivel {
-            opacity: 1;
-        }
+        #textoPersonagens.visivel { opacity: 1; }
 
         .casal-wrapper {
             display: flex;
@@ -425,24 +414,18 @@
 
         .pixel-char {
             image-rendering: pixelated;
-            width: 40px;
-            height: 56px;
+            /* ✅ FIX: menor no mobile */
+            width: clamp(28px, 7vw, 40px);
+            height: clamp(40px, 10vw, 56px);
             animation: bounce-char 0.6s steps(2) infinite alternate;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
-        .pixel-char.char-b {
-            animation-delay: 0.15s;
-        }
+        .pixel-char.char-b { animation-delay: 0.15s; }
 
         @keyframes bounce-char {
-            from {
-                transform: translateY(0px);
-            }
-
-            to {
-                transform: translateY(-6px);
-            }
+            from { transform: translateY(0px); }
+            to   { transform: translateY(-6px); }
         }
 
         .coracao-casal {
@@ -450,24 +433,14 @@
             top: -18px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 16px;
+            font-size: 14px;
             animation: subirCoracao 1.4s ease-in-out infinite;
         }
 
         @keyframes subirCoracao {
-            0% {
-                opacity: 0;
-                transform: translateX(-50%) translateY(0);
-            }
-
-            30% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-28px);
-            }
+            0%   { opacity: 0; transform: translateX(-50%) translateY(0); }
+            30%  { opacity: 1; }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-28px); }
         }
 
         /* ══════════════════════════════════════════════════════════ */
@@ -475,21 +448,23 @@
         /* ══════════════════════════════════════════════════════════ */
         #legenda {
             position: fixed;
-            bottom: 0;
+            /* ✅ FIX: fica acima dos personagens */
+            bottom: 90px;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(212, 81, 111, 0.12), transparent);
-            padding: 18px 0 24px;
+            background: linear-gradient(to top, rgba(212, 81, 111, 0.08), transparent);
+            padding: 12px 0 14px;
             pointer-events: none;
             display: none;
-            z-index: 3;
+            /* ✅ FIX: z-index abaixo dos personagens mas acima do conteúdo */
+            z-index: 45;
         }
 
         #rolando {
             display: block;
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+            font-size: clamp(0.85rem, 2.5vw, 1.1rem);
             color: var(--rosa-primary);
             text-align: center;
             opacity: 0;
@@ -499,71 +474,99 @@
             letter-spacing: 0.01em;
         }
 
-        #rolando.visivel {
-            opacity: 1;
-        }
+        #rolando.visivel { opacity: 1; }
 
         /* ══════════════════════════════════════════════════════════ */
-        /* PLAYER DE MÚSICA (mini, discreto)                         */
+        /* PLAYER DE MÚSICA                                           */
+        /* ✅ FIX: fixo no canto inferior esquerdo, bem compacto      */
+        /* ✅ FIX: não cobre mais o nome/título nem os corações       */
         /* ══════════════════════════════════════════════════════════ */
         #player {
             position: fixed;
-            top: 16px;
-            right: 16px;
-            z-index: 100;
+            /* ✅ FIX: canto inferior esquerdo, discreto */
+            bottom: 16px;
+            left: 16px;
+            /* ✅ FIX: z-index acima dos personagens */
+            z-index: 60;
             display: none;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(10px);
             border-radius: 50px;
-            padding: 8px 16px;
+            /* ✅ FIX: padding menor e compacto */
+            padding: 6px 12px;
             box-shadow: 0 4px 20px rgba(212, 81, 111, 0.2);
             border: 1px solid rgba(212, 81, 111, 0.15);
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             font-family: 'Lato', sans-serif;
-            font-size: 0.75rem;
+            /* ✅ FIX: fonte menor */
+            font-size: 0.68rem;
             color: var(--rosa-primary);
             font-weight: 600;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.04em;
+            /* ✅ FIX: largura máxima para não esticar no mobile */
+            max-width: 160px;
         }
 
-        #player span {
-            font-size: 1rem;
+        #player .icone-musica {
+            font-size: 0.85rem;
+            flex-shrink: 0;
+        }
+
+        #nomeMusica {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 70px;
         }
 
         #btnMute {
             background: none;
             border: none;
             cursor: pointer;
-            font-size: 1.1rem;
+            /* ✅ FIX: botão mudo menor */
+            font-size: 0.9rem;
             padding: 2px;
             line-height: 1;
+            flex-shrink: 0;
+            pointer-events: all;
         }
 
         /* ══════════════════════════════════════════════════════════ */
-        /* RESPONSIVIDADE                                             */
+        /* RESPONSIVIDADE MOBILE                                      */
         /* ══════════════════════════════════════════════════════════ */
         @media (max-width: 640px) {
             #app {
-                padding: 40px 16px 240px;
+                padding: 36px 14px 220px;
             }
 
             .card-frases {
-                padding: 36px 28px;
+                padding: 30px 22px;
                 border-radius: 20px;
             }
 
             #surpresa img {
-                max-width: 260px;
-            }
-
-            .pixel-char {
-                width: 36px;
-                height: 50px;
+                max-width: 240px;
             }
 
             .casal-wrapper {
                 gap: 4px;
+            }
+
+            /* legenda sobe um pouco mais em mobile */
+            #legenda {
+                bottom: 80px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .titulo-inicio {
+                font-size: 1.75rem;
+            }
+
+            .btn-iniciar {
+                font-size: 0.75rem;
+                padding: 12px 22px;
             }
         }
     </style>
@@ -571,29 +574,28 @@
 
 <body>
 
-    <!-- ████████████████████████████████████████████████████████████ -->
-    <!-- TELA INICIAL                                                  -->
-    <!-- ████████████████████████████████████████████████████████████ -->
+    <!-- TELA INICIAL -->
     <div id="tela-inicio">
-        <p class="titulo-inicio">Para Você ❤️</p>
-        <p class="data-inicio">Uma História de Amor</p>
-        <button class="btn-iniciar" onclick="iniciar()">Começar a Nossa História ❤️</button>
+        <span class="inicio-coracao">❤️</span>
+        <!-- ✅ FIX: "Feliz Aniversário" correto e romântico -->
+        <p class="titulo-inicio">Feliz Aniversário</p>
+        <p class="subtitulo-inicio">Para a pessoa mais especial da minha vida</p>
+        <p class="data-inicio">16 de Maio · Com todo o meu amor</p>
+        <br>
+        <button class="btn-iniciar" onclick="iniciar()">Começar Nossa História ❤️</button>
     </div>
 
-    <!-- ████████████████████████████████████████████████████████████ -->
-    <!-- MINI PLAYER (visível após iniciar)                            -->
-    <!-- ████████████████████████████████████████████████████████████ -->
+    <!-- ✅ FIX: PLAYER fixo, compacto, canto inferior esquerdo -->
     <div id="player">
-        <span>🎵</span>
+        <span class="icone-musica">🎵</span>
         <span id="nomeMusica">All of Me</span>
         <button id="btnMute" onclick="toggleMute()" title="Mudo/Som">🔊</button>
     </div>
 
-    <!-- ████████████████████████████████████████████████████████████ -->
-    <!-- APP PRINCIPAL                                                 -->
-    <!-- ████████████████████████████████████████████████████████████ -->
+    <!-- APP PRINCIPAL -->
     <div id="app">
         <div class="header">
+            <!-- ✅ FIX: texto menor e centralizado, não descentraliza no mobile -->
             <h1>💖 Nossa História 💖</h1>
             <span class="data-tag">Feliz Aniversário · 16 de Maio</span>
             <div class="contador-wrapper" id="contador"></div>
@@ -615,51 +617,47 @@
         </div>
     </div>
 
-    <!-- ████████████████████████████████████████████████████████████ -->
-    <!-- PERSONAGENS PIXEL ART                                         -->
-    <!-- ████████████████████████████████████████████████████████████ -->
+    <!-- ✅ FIX: PERSONAGENS sempre fixos, z-index alto, nunca somem -->
     <div id="personagens">
         <div id="textoPersonagens"></div>
         <div class="casal-wrapper" style="position:relative;">
+            <!-- Personagem A (ela) -->
             <svg class="pixel-char" viewBox="0 0 8 12" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="0" width="4" height="4" fill="#f9c0c8" />
-                <rect x="1" y="0" width="6" height="1" fill="#c15a80" />
-                <rect x="1" y="1" width="1" height="2" fill="#c15a80" />
-                <rect x="6" y="1" width="1" height="2" fill="#c15a80" />
-                <rect x="2" y="2" width="1" height="1" fill="#2a1420" />
-                <rect x="5" y="2" width="1" height="1" fill="#2a1420" />
-                <rect x="3" y="3" width="2" height="1" fill="#d4516f" />
-                <rect x="2" y="4" width="4" height="4" fill="#ff9bb4" />
-                <rect x="1" y="4" width="1" height="3" fill="#f9c0c8" />
-                <rect x="2" y="8" width="2" height="4" fill="#c15a80" />
-                <rect x="4" y="8" width="2" height="4" fill="#c15a80" />
+                <rect x="2" y="0" width="4" height="4" fill="#f9c0c8"/>
+                <rect x="1" y="0" width="6" height="1" fill="#c15a80"/>
+                <rect x="1" y="1" width="1" height="2" fill="#c15a80"/>
+                <rect x="6" y="1" width="1" height="2" fill="#c15a80"/>
+                <rect x="2" y="2" width="1" height="1" fill="#2a1420"/>
+                <rect x="5" y="2" width="1" height="1" fill="#2a1420"/>
+                <rect x="3" y="3" width="2" height="1" fill="#d4516f"/>
+                <rect x="2" y="4" width="4" height="4" fill="#ff9bb4"/>
+                <rect x="1" y="4" width="1" height="3" fill="#f9c0c8"/>
+                <rect x="2" y="8" width="2" height="4" fill="#c15a80"/>
+                <rect x="4" y="8" width="2" height="4" fill="#c15a80"/>
             </svg>
-            <div
-                style="position:relative;width:20px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:28px;">
+            <!-- Coração entre os dois -->
+            <div style="position:relative;width:20px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:28px;">
                 <span class="coracao-casal">❤️</span>
             </div>
+            <!-- Personagem B (ele) -->
             <svg class="pixel-char char-b" viewBox="0 0 8 12" xmlns="http://www.w3.org/2000/svg">
-                <rect x="2" y="0" width="4" height="4" fill="#f9c0c8" />
-                <rect x="1" y="0" width="6" height="2" fill="#5a3a2a" />
-                <rect x="2" y="2" width="1" height="1" fill="#2a1420" />
-                <rect x="5" y="2" width="1" height="1" fill="#2a1420" />
-                <rect x="3" y="3" width="2" height="1" fill="#d4516f" />
-                <rect x="2" y="4" width="4" height="4" fill="#7eb8f7" />
-                <rect x="6" y="4" width="1" height="3" fill="#f9c0c8" />
-                <rect x="2" y="8" width="2" height="4" fill="#4a6a9a" />
-                <rect x="4" y="8" width="2" height="4" fill="#4a6a9a" />
+                <rect x="2" y="0" width="4" height="4" fill="#f9c0c8"/>
+                <rect x="1" y="0" width="6" height="2" fill="#5a3a2a"/>
+                <rect x="2" y="2" width="1" height="1" fill="#2a1420"/>
+                <rect x="5" y="2" width="1" height="1" fill="#2a1420"/>
+                <rect x="3" y="3" width="2" height="1" fill="#d4516f"/>
+                <rect x="2" y="4" width="4" height="4" fill="#7eb8f7"/>
+                <rect x="6" y="4" width="1" height="3" fill="#f9c0c8"/>
+                <rect x="2" y="8" width="2" height="4" fill="#4a6a9a"/>
+                <rect x="4" y="8" width="2" height="4" fill="#4a6a9a"/>
             </svg>
         </div>
     </div>
 
-    <!-- ████████████████████████████████████████████████████████████ -->
-    <!-- BARRA LEGENDA                                                 -->
-    <!-- ████████████████████████████████████████████████████████████ -->
+    <!-- BARRA LEGENDA -->
     <div id="legenda"><span id="rolando"></span></div>
 
-    <!-- ████████████████████████████████████████████████████████████ -->
-    <!-- ÁUDIOS — coloque os arquivos .mp3 na mesma pasta do HTML     -->
-    <!-- ████████████████████████████████████████████████████████████ -->
+    <!-- ÁUDIOS -->
     <audio id="audio1" preload="auto"
         src="musica1.mp3/John Legend - All of Me (Official Video) - johnlegendVEVO (youtube).mp3"></audio>
     <audio id="audio2" preload="auto"
@@ -784,7 +782,7 @@
             const tx = Math.random() > 0.5 ? 0.5 : -0.5;
             c.style.left = left + "vw";
             c.style.top = "-40px";
-            c.style.fontSize = (16 + Math.random() * 20) + "px";
+            c.style.fontSize = (14 + Math.random() * 18) + "px";
             c.style.setProperty("--tx", tx);
 
             const dur = 5 + Math.random() * 4;
@@ -804,7 +802,6 @@
         let musica2Iniciada = false;
         let mutado = false;
 
-        // Quando música 1 termina → inicia música 2 automaticamente
         audio1.addEventListener("ended", () => {
             iniciarSegundaMusica();
         });
@@ -820,7 +817,7 @@
         }
 
         // ══════════════════════════════════════════════════════════════
-        // BOTÃO INICIAR — dispara música 1 com o clique do usuário
+        // BOTÃO INICIAR
         // ══════════════════════════════════════════════════════════════
         function iniciar() {
             document.getElementById("tela-inicio").classList.add("oculta");
@@ -829,8 +826,6 @@
             iniciarTextoPersonagens();
 
             audio1.volume = 0.75;
-
-            // O clique do usuário destrava o autoplay em todos os navegadores/celulares
             audio1.play().catch(err => {
                 console.warn("Erro ao reproduzir música 1:", err);
             });
@@ -866,16 +861,15 @@
         }
 
         // ══════════════════════════════════════════════════════════════
-        // MOSTRAR SURPRESA (ao clicar em "Ver a Surpresa")
+        // MOSTRAR SURPRESA
+        // ✅ FIX: personagens NÃO somem mais — removido o display:none
         // ══════════════════════════════════════════════════════════════
         function mostrarSurpresa() {
             document.getElementById("surpresa").style.display = "flex";
             document.getElementById("btnProximo").style.display = "none";
-            document.getElementById("personagens").style.display = "none";
+            // ✅ FIX CRÍTICO: personagens continuam visíveis!
+            // document.getElementById("personagens").style.display = "none"; ← REMOVIDO
 
-            // Se música 1 ainda estiver tocando, ela vai terminar e
-            // disparar o evento "ended" que inicia a música 2.
-            // Se já tiver terminado antes, inicia direto:
             if (audio1.ended && !musica2Iniciada) {
                 iniciarSegundaMusica();
             }
@@ -883,6 +877,7 @@
 
         // ══════════════════════════════════════════════════════════════
         // SEGUNDA MÚSICA + FRASES SINCRONIZADAS
+        // ✅ FIX: personagens NÃO somem aqui também
         // ══════════════════════════════════════════════════════════════
         const textoMusica2 = [
             "Você sabe que essa música é especial para mim...",
@@ -908,7 +903,7 @@
             "Feliz aniversário, meu amor ❤️"
         ];
 
-        const DURACAO_MUSICA2 = 257; // segundos — ajuste conforme duração real do seu mp3
+        const DURACAO_MUSICA2 = 257;
         const INTERVALO_LINHA = Math.floor((DURACAO_MUSICA2 * 1000) / textoMusica2.length);
 
         let textoM2Timer = null;
@@ -917,12 +912,11 @@
             if (musica2Iniciada) return;
             musica2Iniciada = true;
 
-            // Garante que a surpresa está visível
             document.getElementById("surpresa").style.display = "flex";
             document.getElementById("btnProximo").style.display = "none";
-            document.getElementById("personagens").style.display = "none";
+            // ✅ FIX CRÍTICO: personagens continuam visíveis!
+            // document.getElementById("personagens").style.display = "none"; ← REMOVIDO
 
-            // Atualiza nome no mini player
             document.getElementById("nomeMusica").textContent = "Photograph";
 
             audio2.volume = 0.75;
@@ -1003,5 +997,4 @@
     </script>
 
 </body>
-
 </html>
